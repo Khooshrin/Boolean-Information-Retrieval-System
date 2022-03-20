@@ -1,6 +1,7 @@
 import numpy as np, glob, re,os, nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer, WordNetLemmatizer
 
 class Node:
     def __init__(self ,DocID, freq = None):
@@ -17,12 +18,16 @@ def uniqueWordFreq(doc):
     freq = {}
     for word in doc:
         if word not in uniqueWords:
+            ps.stem(word)
+            lemmatizer.lemmatize(word)
             uniqueWords.append(word)
     for word in uniqueWords:
         freq[word] = doc.count(word)
     return freq
 
 Stopwords = set(stopwords.words('english'))
+ps = PorterStemmer()
+lemmatizer = WordNetLemmatizer()
 
 wordsInDocs = {}
 docFolder = 'C:/Users/KHOOSHRIN/Documents/Python Programs/Data Set Files/*'
@@ -35,12 +40,16 @@ for file in glob.glob(docFolder):
     regex = re.compile('[^a-zA-Z\s]')
     doc = re.sub(regex,'',doc)
     words = word_tokenize(doc)
-    words = [word.lower() for word in words if word not in Stopwords]
+    words = [word for word in words if word not in Stopwords]
+    words = [word.lower() for word in words]
+    words = [ps.stem(word) for word in words]
+    words = [lemmatizer.lemmatize(word) for word in words]
     wordsInDocs.update(uniqueWordFreq(words))
     fileIndex[DocID] = os.path.basename(fname)
     DocID = DocID + 1
     
 uniqueWords = set(wordsInDocs.keys())
+
 
 wordLinkedList = {}
 for word in uniqueWords:
@@ -53,7 +62,10 @@ for file in glob.glob(docFolder):
     regex = re.compile('[^a-zA-Z\s]')
     doc = re.sub(regex,'',doc)
     words = word_tokenize(doc)
-    words = [word.lower() for word in words if word not in Stopwords]
+    words = [word for word in words if word not in Stopwords]
+    words = [word.lower() for word in words]
+    words = [ps.stem(word) for word in words]
+    words = [lemmatizer.lemmatize(word) for word in words]
     wordsInDocs=uniqueWordFreq(words)
     for word in wordsInDocs.keys():
         current = wordLinkedList[word].head
@@ -69,17 +81,19 @@ queryWords = []
 booleanWords = []
 for word in query:
     if word.lower() != "and" and word.lower() != "or" and word.lower() != "not":
-        booleanWords.append(word.lower())
-    else:
         queryWords.append(word.lower())
+    else:
+        booleanWords.append(word.lower())
+
+queryWords=[ps.stem(word) for word in queryWords]
+queryWords = [lemmatizer.lemmatize(word) for word in queryWords]
 
 TermDocumentValue = []
 TermDocumentIncidenceMatrix = []
-for word in (booleanWords):
+for word in (queryWords):
     if word.lower() in uniqueWords:
         TermDocumentValue = [0] * len(fileIndex)
         doc = wordLinkedList[word].head
-        print(word)
         while doc.nextval is not None:
             TermDocumentValue[doc.nextval.doc - 1] = 1
             doc = doc.nextval
