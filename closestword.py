@@ -1,6 +1,8 @@
 # Correcting user queries to recieve the right answers using  minimum edit distance algorithm (Levenshtein distance)
 
-# INCOMPLETE!! still needs to be coded
+# minEditDistance function works
+#Levenshtein Distance is found in bottom right corner of each matrix
+# 1 for each insertion, 1 for deletion and 2 for substitution
 
 import numpy as np
 
@@ -43,8 +45,7 @@ def minEditDistance(target,source):
         
     return solution 
 
-#Levenshtein Distance is found in bottom right corner of each matrix
-# 1 for each insertion, 1 for deletion and 2 for substitution
+
 
 print(minEditDistance("#piano", "#pianos")) # 1 insert
 print(minEditDistance("#piano", "#pian")) # 1 delete
