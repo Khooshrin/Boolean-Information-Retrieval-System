@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>BooleanIR API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>BooleanIR</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">import numpy as np, glob, re, os, nltk, sys
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+from nltk.metrics.distance import edit_distance
+
+class Node:
+
+    &#34;&#34;&#34; Class which defines a node of the linked list.
+        Each node has a document ID along with the frequency
+        which stores the frequency of the term in the document
+        with the respective document ID &#34;&#34;&#34;
+    
+    def __init__(self ,DocID, freq = None):
+        self.freq = freq
+        self.doc = DocID
+        self.nextval = None
+    
+class LinkedList:
+
+    &#34;&#34;&#34; Class to store the frequency of the term in a
+        particular document ID only if the document
+        contains the word at least once &#34;&#34;&#34;
+    
+    def __init__(self ,head = None):
+        self.head = head
+
+def uniqueWordFreq(doc):
+
+    &#34;&#34;&#34; Function to find all the unique words in the document
+        passed as a parameter and then calculate the frequency
+        of the unique word in the document and returns it &#34;&#34;&#34;
+    
+    uniqueWords = []
+    freq = {}
+    for word in doc:
+        if word not in uniqueWords:
+            ps.stem(word)
+            lemmatizer.lemmatize(word)
+            uniqueWords.append(word)
+    for word in uniqueWords:
+        freq[word] = doc.count(word)
+    return freq
+
+def rot(str,n):
+
+    &#34;&#34;&#34; Function to rotate the string passed as a parameter
+        by n places and then return it. It is used to
+        calculate all the permuterm combinations possible
+        of the string that is passed as a parameter. &#34;&#34;&#34;
+    
+    return str[n:]+str[:n]
+
+Stopwords = set(stopwords.words(&#39;english&#39;))
+ps = PorterStemmer()
+lemmatizer = WordNetLemmatizer()
+
+&#34;&#34;&#34; Iterate through the list of documents in the folder to find
+    all the unique words present after deleting numbers and
+    special characters. Ignore the stopwords while finding the
+    unique words. &#34;&#34;&#34;
+
+wordsInDocs = {}
+docFolder = &#39;C:/Users/KHOOSHRIN/Documents/PythonPrograms/DataSetFiles/*&#39;
+DocID = 1
+fileIndex = {}
+for file in glob.glob(docFolder):
+    fname = file
+    file = open(file , &#34;r&#34;)
+    doc = file.read()
+    regex = re.compile(&#39;[^a-zA-Z\s]&#39;)
+    doc = re.sub(regex,&#39;&#39;,doc)
+    words = word_tokenize(doc)
+    words = [word for word in words if word not in Stopwords]
+    words = [word.lower() for word in words]
+    words = [ps.stem(word) for word in words]
+    words = [lemmatizer.lemmatize(word) for word in words]
+    wordsInDocs.update(uniqueWordFreq(words))
+    fileIndex[DocID] = os.path.basename(fname)
+    DocID = DocID + 1
+    
+uniqueWords = set(wordsInDocs.keys())
+
+&#34;&#34;&#34; Iterate through the list of unique words stemming and lemmatizing
+    each termto create the linked list for each term and then find all
+    the permuterms for the given term and copy the same linked list
+    for the permuterms. This helps in wildcard query handling. &#34;&#34;&#34;
+
+wordLinkedList = {}
+permuterm = {}
+termPermuterm={}
+for word in uniqueWords:
+    wordLinkedList[word] = LinkedList()
+    wordLinkedList[word].head = Node(1,Node)
+DocID = 1
+for file in glob.glob(docFolder):
+    file = open(file, &#34;r&#34;)
+    doc = file.read()
+    regex = re.compile(&#39;[^a-zA-Z\s]&#39;)
+    doc = re.sub(regex,&#39;&#39;,doc)
+    words = word_tokenize(doc)
+    words = [word for word in words if word not in Stopwords]
+    words = [word.lower() for word in words]
+    words = [ps.stem(word) for word in words]
+    words = [lemmatizer.lemmatize(word) for word in words]
+    wordsInDocs=uniqueWordFreq(words)
+    for word in wordsInDocs.keys():
+        current = wordLinkedList[word].head
+        while current.nextval is not None:
+            current = current.nextval
+        current.nextval = Node(DocID ,wordsInDocs[word])
+        for i in range(len(word+&#34;$&#34;),0,-1):
+            pterm = rot(word+&#34;$&#34;,i)
+            uniqueWords.add(pterm)
+            wordLinkedList[pterm] = wordLinkedList[word]
+    DocID = DocID + 1
+
+&#34;&#34;&#34; Accepting query as input from the user and splitting
+    the query into boolean words (and, or, not) and
+    query words(all other words with the exception of the
+    three boolean words). &#34;&#34;&#34;
+
+booleanQuery = input(&#39;Enter your query:&#39;)
+regex = re.compile(&#39;[^a-zA-Z*\s]&#39;)
+booleanQuery = re.sub(regex,&#39;&#39;,booleanQuery)
+query = booleanQuery.split()
+queryWords = []
+booleanWords = []
+for word in query:
+    if word.lower() != &#34;and&#34; and word.lower() != &#34;or&#34; and word.lower() != &#34;not&#34;:          
+        queryWords.append(word.lower())
+    else:
+        booleanWords.append(word.lower())
+
+&#34;&#34;&#34; Performing Stemming and Lemmatization on each query
+    word and then add a $ to the end of the word indicating
+    it is the end of the word. &#34;&#34;&#34;
+
+queryWords = [ps.stem(word) for word in queryWords]
+queryWords = [lemmatizer.lemmatize(word) for word in queryWords]
+queryWords = [word+&#34;$&#34; for word in queryWords]
+
+&#34;&#34;&#34; Performing a spell check and correction on all the query
+    words if the spelling is wrong. This is done by comparing
+    the edit distance between the query words with all the
+    unique words across all the documents. The word is then
+    replaced by the word which has the minimum edit distance.
+    If the query word exists in the documents, the minimum edit
+    distance is zero and the word remains unchanged. &#34;&#34;&#34;
+
+
+countQueryWords = 0
+for word in queryWords:
+    distance = -1
+    minDistance = sys.maxsize
+    minWord = &#34;&#34;
+    for w in uniqueWords:
+        distance = edit_distance(word,w)
+        if distance&lt;minDistance :
+            minDistance = distance
+            minWord = w
+    queryWords.remove(word)
+    word = minWord
+    queryWords.insert(countQueryWords,word)
+    countQueryWords = countQueryWords + 1
+
+&#34;&#34;&#34; In case the query is a wildcard query, we find its permuterms
+    by performing rotations until &#39;*&#39; is the last character. We
+    then replace the query word with its perumterm that has &#39;*&#39;
+    as the last character which helps in wildcard query processing. &#34;&#34;&#34;
+
+countQueryWords = 0
+for word in queryWords:
+        for i in range(len(word),0,-1):
+            pterm = rot(word,i)
+            if pterm[-1]==&#39;*&#39;:
+                queryWords.remove(word)
+                queryWords.insert(countQueryWords,pterm)
+        countQueryWords = countQueryWords + 1
+
+TermDocumentValue = []
+TermDocumentIncidenceMatrix = []
+PermuTermIncidenceMatrix = []
+
+&#34;&#34;&#34; The term document incidence matrix is created by first creating
+    the vector for that term across all documents using the linked
+    list created for that term. The vector which is in the form of
+    list is then added to another list which contains the vectors
+    for all query words. In this way, the term document incidence
+    matrix is created for all the query terms. &#34;&#34;&#34;
+
+for word in queryWords:
+    if word[-1] == &#39;*&#39;:
+      TermDocumentValue = [0] * len(fileIndex)
+      for uniqueWord in uniqueWords:
+          if uniqueWord.lower().startswith(word[:len(word)-1]):
+            doc = wordLinkedList[uniqueWord].head
+            while doc.nextval is not None:
+                TermDocumentValue[doc.nextval.doc - 1] = 1
+                doc = doc.nextval
+            TermDocumentIncidenceMatrix.append(TermDocumentValue)
+    elif word.lower() in uniqueWords:
+        TermDocumentValue = [0] * len(fileIndex)
+        doc = wordLinkedList[word].head
+        while doc.nextval is not None:
+            TermDocumentValue[doc.nextval.doc - 1] = 1
+            doc = doc.nextval
+        TermDocumentIncidenceMatrix.append(TermDocumentValue)
+
+&#34;&#34;&#34; Applies the unary not operator on the relevant query term.
+    This is used to invert the values present in the vector
+    for that term. The uninverted vector is then deleted from
+    incidence matrix and the inverted vector is inserted into
+    it at the same index. &#34;&#34;&#34;
+
+countQueryWords = 0
+for word in booleanWords:
+    if word == &#34;not&#34; :
+        print(countQueryWords)
+        list1 = TermDocumentIncidenceMatrix[countQueryWords]
+        res = []
+        for doc in list1 :
+            if doc == 0 :
+                res.append(1)
+            else :
+                res.append(0)
+        TermDocumentIncidenceMatrix.remove(list1)
+        TermDocumentIncidenceMatrix.insert(countQueryWords, res)
+        TermDocumentValue = res
+        booleanWords.remove(word)
+    else :
+        countQueryWords = countQueryWords + 1
+
+&#34;&#34;&#34; Used to perform the &#39;and&#39; and &#39;or&#39; boolean query operations.
+    Two lists are created which store the first 2 rows of the
+    incidence matrix. Depending on the boolean word either
+    bitwise and operation or bitwise or operation is applied
+    on the query word vectors. The result is then replaced as
+    the first row of the incidence matrix and the second row is deleted. &#34;&#34;&#34;
+
+for word in booleanWords:
+    list1 = TermDocumentIncidenceMatrix[0]
+    list2 = TermDocumentIncidenceMatrix[1]
+    if word == &#34;and&#34;:
+        res = [w1 &amp; w2 for (w1,w2) in zip(list1,list2)]
+        TermDocumentIncidenceMatrix.remove(list1)
+        TermDocumentIncidenceMatrix.remove(list2)
+        TermDocumentIncidenceMatrix.insert(0, res)
+    elif word == &#34;or&#34;:
+        res = [w1 | w2 for (w1,w2) in zip(list1,list2)]
+        TermDocumentIncidenceMatrix.remove(list1)
+        
+        TermDocumentIncidenceMatrix.remove(list2)
+        TermDocumentIncidenceMatrix.insert(0, res)
+
+&#34;&#34;&#34; The final result is calculated and stored in the first row
+    of the incidence matrix. This list is then iterated through
+    and whenever the value is 1, it implies that the document
+    satisfies the given boolean query and its name is displayed.
+    If the value is 0, it skips to the value of the next document
+    in the resultant vector. &#34;&#34;&#34;
+
+result = TermDocumentIncidenceMatrix[0]
+cnt = 1
+for index in result:
+    if index == 1:
+        print(fileIndex[cnt])
+    cnt = cnt+1</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-variables">Global variables</h2>
+<dl>
+<dt id="BooleanIR.PermuTermIncidenceMatrix"><code class="name">var <span class="ident">PermuTermIncidenceMatrix</span></code></dt>
+<dd>
+<div class="desc"><p>The term document incidence matrix is created by first creating
+the vector for that term across all documents using the linked
+list created for that term. The vector which is in the form of
+list is then added to another list which contains the vectors
+for all query words. In this way, the term document incidence
+matrix is created for all the query terms.</p></div>
+</dd>
+<dt id="BooleanIR.lemmatizer"><code class="name">var <span class="ident">lemmatizer</span></code></dt>
+<dd>
+<div class="desc"><p>Iterate through the list of documents in the folder to find
+all the unique words present after deleting numbers and
+special characters. Ignore the stopwords while finding the
+unique words.</p></div>
+</dd>
+<dt id="BooleanIR.queryWords"><code class="name">var <span class="ident">queryWords</span></code></dt>
+<dd>
+<div class="desc"><p>Performing a spell check and correction on all the query
+words if the spelling is wrong. This is done by comparing
+the edit distance between the query words with all the
+unique words across all the documents. The word is then
+replaced by the word which has the minimum edit distance.
+If the query word exists in the documents, the minimum edit
+distance is zero and the word remains unchanged.</p></div>
+</dd>
+<dt id="BooleanIR.uniqueWords"><code class="name">var <span class="ident">uniqueWords</span></code></dt>
+<dd>
+<div class="desc"><p>Iterate through the list of unique words stemming and lemmatizing
+each termto create the linked list for each term and then find all
+the permuterms for the given term and copy the same linked list
+for the permuterms. This helps in wildcard query handling.</p></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="BooleanIR.rot"><code class="name flex">
+<span>def <span class="ident">rot</span></span>(<span>str, n)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to rotate the string passed as a parameter
+by n places and then return it. It is used to
+calculate all the permuterm combinations possible
+of the string that is passed as a parameter.</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def rot(str,n):
+
+    &#34;&#34;&#34; Function to rotate the string passed as a parameter
+        by n places and then return it. It is used to
+        calculate all the permuterm combinations possible
+        of the string that is passed as a parameter. &#34;&#34;&#34;
+    
+    return str[n:]+str[:n]</code></pre>
+</details>
+</dd>
+<dt id="BooleanIR.uniqueWordFreq"><code class="name flex">
+<span>def <span class="ident">uniqueWordFreq</span></span>(<span>doc)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Function to find all the unique words in the document
+passed as a parameter and then calculate the frequency
+of the unique word in the document and returns it</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def uniqueWordFreq(doc):
+
+    &#34;&#34;&#34; Function to find all the unique words in the document
+        passed as a parameter and then calculate the frequency
+        of the unique word in the document and returns it &#34;&#34;&#34;
+    
+    uniqueWords = []
+    freq = {}
+    for word in doc:
+        if word not in uniqueWords:
+            ps.stem(word)
+            lemmatizer.lemmatize(word)
+            uniqueWords.append(word)
+    for word in uniqueWords:
+        freq[word] = doc.count(word)
+    return freq</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="BooleanIR.LinkedList"><code class="flex name class">
+<span>class <span class="ident">LinkedList</span></span>
+<span>(</span><span>head=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class to store the frequency of the term in a
+particular document ID only if the document
+contains the word at least once</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class LinkedList:
+
+    &#34;&#34;&#34; Class to store the frequency of the term in a
+        particular document ID only if the document
+        contains the word at least once &#34;&#34;&#34;
+    
+    def __init__(self ,head = None):
+        self.head = head</code></pre>
+</details>
+</dd>
+<dt id="BooleanIR.Node"><code class="flex name class">
+<span>class <span class="ident">Node</span></span>
+<span>(</span><span>DocID, freq=None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Class which defines a node of the linked list.
+Each node has a document ID along with the frequency
+which stores the frequency of the term in the document
+with the respective document ID</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class Node:
+
+    &#34;&#34;&#34; Class which defines a node of the linked list.
+        Each node has a document ID along with the frequency
+        which stores the frequency of the term in the document
+        with the respective document ID &#34;&#34;&#34;
+    
+    def __init__(self ,DocID, freq = None):
+        self.freq = freq
+        self.doc = DocID
+        self.nextval = None</code></pre>
+</details>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3><a href="#header-variables">Global variables</a></h3>
+<ul class="">
+<li><code><a title="BooleanIR.PermuTermIncidenceMatrix" href="#BooleanIR.PermuTermIncidenceMatrix">PermuTermIncidenceMatrix</a></code></li>
+<li><code><a title="BooleanIR.lemmatizer" href="#BooleanIR.lemmatizer">lemmatizer</a></code></li>
+<li><code><a title="BooleanIR.queryWords" href="#BooleanIR.queryWords">queryWords</a></code></li>
+<li><code><a title="BooleanIR.uniqueWords" href="#BooleanIR.uniqueWords">uniqueWords</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="BooleanIR.rot" href="#BooleanIR.rot">rot</a></code></li>
+<li><code><a title="BooleanIR.uniqueWordFreq" href="#BooleanIR.uniqueWordFreq">uniqueWordFreq</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="BooleanIR.LinkedList" href="#BooleanIR.LinkedList">LinkedList</a></code></h4>
+</li>
+<li>
+<h4><code><a title="BooleanIR.Node" href="#BooleanIR.Node">Node</a></code></h4>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>
