@@ -2,6 +2,9 @@ import numpy as np, glob, re,os, nltk
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer, WordNetLemmatizer
+from nltk.metrics.distance import edit_distance
+nltk.download('words')
+from nltk.corpus import words
 
 class Node:
     def __init__(self ,DocID, freq = None):
@@ -25,9 +28,13 @@ def uniqueWordFreq(doc):
         freq[word] = doc.count(word)
     return freq
 
+def rot(str,n):
+    return str[n:]+str[:n]
+
 Stopwords = set(stopwords.words('english'))
 ps = PorterStemmer()
 lemmatizer = WordNetLemmatizer()
+correctSpelling=words.words()
 
 wordsInDocs = {}
 docFolder = 'C:/Users/KHOOSHRIN/Documents/Python Programs/Data Set Files/*'
@@ -52,6 +59,8 @@ uniqueWords = set(wordsInDocs.keys())
 
 
 wordLinkedList = {}
+permuterm = {}
+termPermuterm={}
 for word in uniqueWords:
     wordLinkedList[word] = LinkedList()
     wordLinkedList[word].head = Node(1,Node)
@@ -72,33 +81,63 @@ for file in glob.glob(docFolder):
         while current.nextval is not None:
             current = current.nextval
         current.nextval = Node(DocID ,wordsInDocs[word])
+        for i in range(len(word+"$"),0,-1):
+            pterm = rot(word+"$",i)
+            uniqueWords.add(pterm)
+            wordLinkedList[pterm] = wordLinkedList[word]
     DocID = DocID + 1
 
 
-query = input('Enter your query:')
-query = word_tokenize(query)
+booleanQuery = input('Enter your query:')
+regex = re.compile('[^a-zA-Z*\s]')
+booleanQuery = re.sub(regex,'',booleanQuery)
+query = booleanQuery.split()
 queryWords = []
 booleanWords = []
 for word in query:
-    if word.lower() != "and" and word.lower() != "or" and word.lower() != "not":
+    if word.lower() != "and" and word.lower() != "or" and word.lower() != "not":          
         queryWords.append(word.lower())
     else:
         booleanWords.append(word.lower())
 
-queryWords=[ps.stem(word) for word in queryWords]
+queryWords = [ps.stem(word) for word in queryWords]
 queryWords = [lemmatizer.lemmatize(word) for word in queryWords]
+queryWords = [word+"$" for word in queryWords]
+
+
+countQueryWords = 0
+for word in queryWords:
+        for i in range(len(word),0,-1):
+            pterm = rot(word,i)
+            if pterm[-1]=='*':
+                queryWords.remove(word)
+                queryWords.insert(countQueryWords,pterm)
+        countQueryWords = countQueryWords + 1
+print(queryWords)
 
 TermDocumentValue = []
 TermDocumentIncidenceMatrix = []
-for word in (queryWords):
-    if word.lower() in uniqueWords:
+PermuTermIncidenceMatrix = []
+
+for word in queryWords:
+    if word[-1] == '*':
+      TermDocumentValue = [0] * len(fileIndex)
+      for uniqueWord in uniqueWords:
+          if uniqueWord.lower().startswith(word[:len(word)-1]):
+            doc = wordLinkedList[uniqueWord].head
+            while doc.nextval is not None:
+                TermDocumentValue[doc.nextval.doc - 1] = 1
+                doc = doc.nextval
+            TermDocumentIncidenceMatrix.append(TermDocumentValue)
+    elif word.lower() in uniqueWords:
         TermDocumentValue = [0] * len(fileIndex)
         doc = wordLinkedList[word].head
         while doc.nextval is not None:
             TermDocumentValue[doc.nextval.doc - 1] = 1
             doc = doc.nextval
         TermDocumentIncidenceMatrix.append(TermDocumentValue)
-for word in queryWords:
+
+for word in booleanWords:
     list1 = TermDocumentIncidenceMatrix[0]
     list2 = TermDocumentIncidenceMatrix[1]
     if word == "and":
@@ -118,7 +157,7 @@ for word in queryWords:
         TermDocumentIncidenceMatrix.remove(list1)
         res = [w1 & w2 for (w1,w2) in zip(list1,res)]
         TermDocumentIncidenceMatrix.insert(0, res);
-        
+
 result = TermDocumentIncidenceMatrix[0]
 cnt = 1
 for index in result:
