@@ -62,7 +62,7 @@ lemmatizer = WordNetLemmatizer()                #Defining the lemmatizer to use 
     the respective document name. """
 
 wordsInDocs = {}                                #Dictionary to store the unique words in all the douments as the key and their frequecies as the value
-docFolder = 'C:/Users/KHOOSHRIN/Documents/PythonPrograms/DataSetFiles/*'        #Path for all the documents in the retrieval system
+docFolder = '*/DataSetFiles/*'        #Path for all the documents in the retrieval system
 DocID = 1
 fileIndex = {}                                  #Dictionary to store th file index number as the key and the file name as the frequency
 for file in glob.glob(docFolder):               #Iterating through all files in the folder
@@ -88,8 +88,6 @@ uniqueWords = set(wordsInDocs.keys())           #Set which stores all the unique
     for the permuterms. This helps in wildcard query handling. """
 
 wordLinkedList = {}                             #Linked list of each term in the document which stores the Document ID of the document
-#permuterm = {}
-#termPermuterm={}
 for word in uniqueWords:                        #Iterating through all the unique words across the documents
     wordLinkedList[word] = LinkedList()         #Initialising a linked list for each unique word
     wordLinkedList[word].head = Node(1,Node)
@@ -181,7 +179,6 @@ for word in queryWords:                                         #Iterating throu
 
 TermDocumentValue = []                                          #List to store the vector of each term across all documents
 TermDocumentIncidenceMatrix = []                                #List to store the vectors of all terms across all documents therby making a matrix
-#PermuTermIncidenceMatrix = []
 
 """ The term document incidence matrix is created by first creating
     the vector for that term across all documents using the linked
@@ -217,7 +214,6 @@ for word in queryWords:                                                 #Iterati
 countQueryWords = 0                                                    #Counter to count the number of query words
 for word in booleanWords:                                              #Iterating through all the words in boolean words
     if word == "not" :                                                 #If the boolean term is not
-        #print(countQueryWords)
         list1 = TermDocumentIncidenceMatrix[countQueryWords]           #A copy is made of the vector of the query word on which the not operator is to be applied
         res = []                                                       #To store the vector after the not operation has been carried out
         for doc in list1 :                                             #for every int value in the vector list
